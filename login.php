@@ -1,204 +1,140 @@
-<!doctype html>
+
+<?php
+$errors = [];
+$email = '';
+$success = false;
+
+if (isset($_POST['submit'])) {
+
+    $email = trim($_POST['email'] ?? '');
+    $password = $_POST['password'] ?? '';
+
+    if (empty($email)) {
+        $errors['email'] = "Email is required.";
+    } elseif ($email != "admin@smartsalon" &&
+              !preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/", $email)) {
+        $errors['email'] = "Invalid email format.";
+    }
+
+    if (empty($password)) {
+        $errors['password'] = "Password is required.";
+    }
+
+    if (empty($errors)) {
+
+        if ($email == "admin@smartsalon" &&
+            $password == "salon123") {
+
+            $success = true;
+
+        } else {
+            $errors['login'] = "Incorrect email or password.";
+        }
+    }
+}
+?>
+
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Login</title>
+    <title>Login - Smart Salon</title>
 
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="Styles.css" />
-  </head>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 
-  <body class="auth-page">
-    <main class="container">
-      <div class="row justify-content-center align-items-center min-vh-100">
-        <div class="col-12 col-sm-10 col-md-7 col-lg-5">
-          <div class="auth-card">
-            <!-- BRAND -->
+    <link rel="stylesheet" href="Styles.css">
+</head>
 
-            <div class="text-center">
-              <a href="index.php" class="brand-name"> Smart Salon </a>
+<body class="auth-page">
+
+    <div class="auth-card">
+
+        <div class="brand-name">Smart Salon</div>
+
+        <h2 class="auth-heading">Login to Your Account</h2>
+
+        <?php if ($success) { ?>
+            <div class="success-message">
+                Login successful!
             </div>
+        <?php } ?>
 
-            <div class="text-center auth-heading">
-              <h1>Welcome Back</h1>
-              <p>Login to your Smart Salon account.</p>
-            </div>
+        <form method="POST" action="">
 
-            <form id="loginForm">
-              <div class="mb-3">
-                <label for="email" class="form-label"> Email Address </label>
+            <div class="mb-3">
+                <label for="email" class="form-label">
+                    Email Address
+                </label>
 
                 <input
-                  type="email"
-                  class="form-control"
-                  id="email"
-                  name="email"
-                  placeholder="Enter your email"
-                />
-              </div>
+                    type="text"
+                    id="email"
+                    name="email"
+                    class="form-control"
+                    value="<?php echo htmlspecialchars($email); ?>"
+                >
 
-              <div class="mb-2">
-                <label for="password" class="form-label"> Password </label>
+                <?php if (isset($errors['email'])) { ?>
+                    <small class="text-danger">
+                        <?php echo $errors['email']; ?>
+                    </small>
+                <?php } ?>
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">
+                    Password
+                </label>
 
                 <input
-                  type="password"
-                  class="form-control"
-                  id="password"
-                  name="password"
-                  placeholder="Enter your password"
-                />
-              </div>
+                    type="password"
+                    id="password"
+                    name="password"
+                    class="form-control"
+                >
 
-              <!-- yung sa attempts=3 -->
-              <div class="attempts">
-                <span id="attemptsText"> Attempts left: 3 </span>
-              </div>
+                <?php if (isset($errors['password'])) { ?>
+                    <small class="text-danger">
+                        <?php echo $errors['password']; ?>
+                    </small>
+                <?php } ?>
+            </div>
 
-              <div class="login-options">
-                <!--remember me-->
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    id="remember"
-                  />
 
-                  <label class="form-check-label" for="remember">
-                    Remember me
-                  </label>
+            <?php if (isset($errors['login'])) { ?>
+                <div class="error-message mb-3">
+                    <?php echo $errors['login']; ?>
                 </div>
+            <?php } ?>
 
-                <a href="#" class="forgot-link"> Forgot password? </a>
-              </div>
+            <div class="login-options mb-3">
+                <a href="#" class="forgot-link">Forgot Password?</a>
+            </div>
 
-              <!--login btn-->
-              <button
+            <button
                 type="submit"
-                id="loginButton"
+                name="submit"
                 class="btn login-btn w-100"
-              >
+            >
                 Login
-              </button>
+            </button>
 
-              <div id="loginMessage" class="text-center"></div>
-            </form>
+        </form>
 
-            <div class="register-text">
-              Don't have an account?
+        <p class="register-text mt-3">
+            Don't have an account?
+            <a href="register.php">Register here</a>
+        </p>
 
-              <a href="register.php"> Register </a>
-            </div>
-
-            <div class="back-container">
-              <a href="index.php" class="back-link"> Back to Home</a>
-            </div>
-          </div>
+        <div class="back-container">
+            <a href="index.php" class="back-link">Back to Home</a>
         </div>
-      </div>
-    </main>
 
-    <!--para sa jquery-->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
-    <!--javscript bootstrap-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    </div>
 
-    <script>
-      $(document).ready(function () {
-        // Number of attempts
-
-        let attempts = 3;
-
-        //--/////////////////////////////////////////////////////////////--//
-        //Test login account
-        const correctEmail = "admin@smartsalon.com";
-        const correctPassword = "salon123";
-        //--///////////////////////////////////////////////////////////---///
-
-        $("#loginForm").validate({
-          rules: {
-            email: {
-              required: true,
-              email: true,
-            },
-
-            password: {
-              required: true,
-              minlength: 8,
-            },
-          },
-
-          messages: {
-            email: {
-              required: "Email is required.",
-              email: "Please enter a valid email address.",
-            },
-
-            password: {
-              required: "Password is required.",
-              minlength: "Password must be at least 8 characters.",
-            },
-          },
-
-          //para sa attempts, checking
-          submitHandler: function (form) {
-            if (attempts <= 0) {
-              $("#loginMessage")
-                .removeClass("success-message")
-                .addClass("error-message")
-                .text("No attempts left. Login is disabled.");
-
-              return false;
-            }
-
-            let email = $("#email").val().trim();
-            let password = $("#password").val();
-
-            if (email === correctEmail && password === correctPassword) {
-              $("#loginMessage")
-                .removeClass("error-message")
-                .addClass("success-message")
-                .text("Login successful!");
-
-              $("#attemptsText").text("Login successful.");
-
-              // if hindi nag success yung attempts ay yung login btn ay id-disable
-              $("#loginButton").prop("disabled", true);
-            } else {
-              attempts--;
-              $("#attemptsText").text("Attempts left: " + attempts);
-
-              $("#loginMessage")
-                .removeClass("success-message")
-                .addClass("error-message")
-                .text("Incorrect email or password.");
-
-              $("#password").val("");
-
-              if (attempts === 0) {
-                $("#loginMessage").text("No attempts left. Login is disabled.");
-
-                // same kanina, if hindi nag success yung attempts ay yung login btn ay id-disable
-                $("#loginButton").prop("disabled", true);
-
-                $("#email").prop("disabled", true);
-                $("#password").prop("disabled", true);
-                $("#remember").prop("disabled", true);
-              }
-            }
-          },
-        });
-      });
-    </script>
-  </body>
+</body>
 </html>

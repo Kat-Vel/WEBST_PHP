@@ -1,223 +1,242 @@
-<!doctype html>
+
+<?php
+$errors = [];
+$success = false;
+
+$firstName = '';
+$lastName = '';
+$email = '';
+$password = '';
+$confirmPassword = '';
+
+if (isset($_POST['submit'])) {
+
+    $firstName = trim($_POST['firstName'] ?? '');
+    $lastName = trim($_POST['lastName'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $password = $_POST['password'] ?? '';
+    $confirmPassword = $_POST['confirmPassword'] ?? '';
+
+    
+    if (empty($firstName)) {
+        $errors['firstName'] = "First name is required.";
+    } elseif (!preg_match("/^[a-zA-Z ]+$/", $firstName)) {
+        $errors['firstName'] = "First name must contain letters only.";
+    }
+
+    if (empty($lastName)) {
+        $errors['lastName'] = "Last name is required.";
+    } elseif (!preg_match("/^[a-zA-Z ]+$/", $lastName)) {
+        $errors['lastName'] = "Last name must contain letters only.";
+    }
+
+    if (empty($email)) {
+        $errors['email'] = "Email is required.";
+    } elseif (!preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/", $email)) {
+        $errors['email'] = "Invalid email format.";
+    }
+
+
+    if (empty($password)) {
+        $errors['password'] = "Password is required.";
+    } elseif (strlen($password) < 8) {
+        $errors['password'] = "Password must be at least 8 characters.";
+    } elseif (!preg_match("/[A-Za-z]/", $password) ||
+              !preg_match("/[0-9]/", $password)) {
+        $errors['password'] = "Password must contain a letter and a number.";
+    }
+
+    if (empty($confirmPassword)) {
+        $errors['confirmPassword'] = "Please confirm your password.";
+    } elseif ($password != $confirmPassword) {
+        $errors['confirmPassword'] = "Passwords do not match.";
+    }
+
+    if (!isset($_POST['terms'])) {
+        $errors['terms'] = "You must agree to the terms.";
+    }
+
+    if (empty($errors)) {
+        $success = true;
+    }
+}
+?>
+
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Register</title>
+    <title>Register - Smart Salon</title>
 
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="Styles.css" />
-  </head>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 
-  <body class="auth-page">
-    <main class="container">
-      <div class="row justify-content-center align-items-center min-vh-100">
-        <div class="col-12 col-sm-10 col-md-8 col-lg-6">
-          <div class="auth-card">
-            <div class="text-center">
-              <a href="index.php" class="brand-name"> Smart Salon </a>
+    <link rel="stylesheet" href="Styles.css">
+</head>
+
+<body class="auth-page">
+
+    <div class="auth-card">
+
+        <div class="brand-name">Smart Salon</div>
+
+        <h2 class="auth-heading">Create an Account</h2>
+
+        <?php if ($success) { ?>
+            <div class="success-message">
+                Registration successful!
             </div>
+        <?php } ?>
 
-            <div class="text-center auth-heading">
-              <h1>Create an Account</h1>
-              <p>Register for your Smart Salon account.</p>
-            </div>
+        <form method="POST" action="">
 
-            <form id="registerForm">
-              <div class="row g-3">
-                <!--para sa Firstname-->
-                <div class="col-md-6">
-                  <label for="firstName" class="form-label"> First Name </label>
-                  <input
+            <div class="mb-3">
+                <label for="firstName" class="form-label">
+                    First Name
+                </label>
+
+                <input
                     type="text"
-                    class="form-control"
                     id="firstName"
                     name="firstName"
-                    placeholder="First name"
-                  />
-                </div>
-
-                <!--then last name-->
-                <div class="col-md-6">
-                  <label for="lastName" class="form-label"> Last Name </label>
-                  <input
-                    type="text"
                     class="form-control"
+                    value="<?php echo htmlspecialchars($firstName); ?>"
+                >
+
+                <?php if (isset($errors['firstName'])) { ?>
+                    <small class="text-danger">
+                        <?php echo $errors['firstName']; ?>
+                    </small>
+                <?php } ?>
+            </div>
+
+            <div class="mb-3">
+                <label for="lastName" class="form-label">
+                    Last Name
+                </label>
+
+                <input
+                    type="text"
                     id="lastName"
                     name="lastName"
-                    placeholder="Last name"
-                  />
-                </div>
+                    class="form-control"
+                    value="<?php echo htmlspecialchars($lastName); ?>"
+                >
 
-                <div class="col-12">
-                  <label for="registerEmail" class="form-label">
+                <?php if (isset($errors['lastName'])) { ?>
+                    <small class="text-danger">
+                        <?php echo $errors['lastName']; ?>
+                    </small>
+                <?php } ?>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">
                     Email Address
-                  </label>
-                  <input
-                    type="email"
-                    class="form-control"
-                    id="registerEmail"
+                </label>
+
+                <input
+                    type="text"
+                    id="email"
                     name="email"
-                    placeholder="Enter your email"
-                  />
-                </div>
+                    class="form-control"
+                    value="<?php echo htmlspecialchars($email); ?>"
+                >
 
-                <div class="col-md-6">
-                  <label for="registerPassword" class="form-label">
+                <?php if (isset($errors['email'])) { ?>
+                    <small class="text-danger">
+                        <?php echo $errors['email']; ?>
+                    </small>
+                <?php } ?>
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">
                     Password
-                  </label>
+                </label>
 
-                  <input
+                <input
                     type="password"
-                    class="form-control"
-                    id="registerPassword"
+                    id="password"
                     name="password"
-                    placeholder="Create password"
-                  />
-                </div>
-
-                <!--password ulit-->
-                <div class="col-md-6">
-                  <label for="confirmPassword" class="form-label">
-                    Confirm Password
-                  </label>
-                  <input
-                    type="password"
                     class="form-control"
+                >
+
+                <?php if (isset($errors['password'])) { ?>
+                    <small class="text-danger">
+                        <?php echo $errors['password']; ?>
+                    </small>
+                <?php } ?>
+            </div>
+
+
+            <div class="mb-3">
+                <label for="confirmPassword" class="form-label">
+                    Confirm Password
+                </label>
+
+                <input
+                    type="password"
                     id="confirmPassword"
                     name="confirmPassword"
-                    placeholder="Confirm password"
-                  />
-                </div>
+                    class="form-control"
+                >
 
-                <div class="col-12">
-                  <div class="form-check">
+                <?php if (isset($errors['confirmPassword'])) { ?>
+                    <small class="text-danger">
+                        <?php echo $errors['confirmPassword']; ?>
+                    </small>
+                <?php } ?>
+            </div>
+
+            <div class="mb-3">
+
+                <div class="form-check">
                     <input
-                      class="form-check-input"
-                      type="checkbox"
-                      id="terms"
-                      name="terms"
-                    />
+                        type="checkbox"
+                        id="terms"
+                        name="terms"
+                        class="form-check-input"
+                        value="yes"
+                        <?php if (isset($_POST['terms'])) echo 'checked'; ?>
+                    >
 
-                    <label class="form-check-label" for="terms">
-                      I agree to the Terms and Privacy Policy.
+                    <label for="terms" class="form-check-label">
+                        I agree to the Terms and Conditions
                     </label>
-                  </div>
                 </div>
 
-                <!--btm-->
-                <div class="col-12">
-                  <button type="submit" class="btn login-btn w-100">
-                    Create Account
-                  </button>
-                </div>
-              </div>
-            </form>
+                <?php if (isset($errors['terms'])) { ?>
+                    <small class="text-danger">
+                        <?php echo $errors['terms']; ?>
+                    </small>
+                <?php } ?>
 
-            <div class="register-text">
-              Already have an account?
-
-              <a href="login.php"> Login </a>
             </div>
 
-            <div class="back-container">
-              <a href="index.php" class="back-link"> Back to Home </a>
-            </div>
-          </div>
+            <button
+                type="submit"
+                name="submit"
+                class="btn login-btn w-100"
+            >
+                Register
+            </button>
+
+        </form>
+
+        <p class="register-text mt-3">
+            Already have an account?
+            <a href="login.php">Login here</a>
+        </p>
+
+        <div class="back-container">
+            <a href="index.php" class="back-link">Back to Home</a>
         </div>
-      </div>
-    </main>
 
-    <!--para naman jquery-->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    </div>
 
-    <!--jvascript bootstrp-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-      $(document).ready(function () {
-        $("#registerForm").validate({
-          rules: {
-            firstName: {
-              required: true,
-              minlength: 2,
-              maxlength: 20,
-            },
-
-            lastName: {
-              required: true,
-              minlength: 2,
-              maxlength: 20,
-            },
-
-            email: {
-              required: true,
-              email: true,
-            },
-
-            password: {
-              required: true,
-              minlength: 6,
-            },
-
-            confirmPassword: {
-              required: true,
-              equalTo: "#registerPassword",
-            },
-
-            terms: {
-              required: true,
-            },
-          },
-
-          messages: {
-            firstName: {
-              required: "First name is required.",
-              minlength: "First name must be at least 2 characters.",
-              maxlength: "First name must not exceed 20 characters.",
-            },
-
-            lastName: {
-              required: "Last name is required.",
-              minlength: "Last name must be at least 2 characters.",
-              maxlength: "Last name must not exceed 20 characters.",
-            },
-
-            email: {
-              required: "Email is required.",
-              email: "Please enter a valid email address.",
-            },
-
-            password: {
-              required: "Password is required.",
-              minlength: "Password must be at least 6 characters.",
-            },
-
-            confirmPassword: {
-              required: "Please confirm your password.",
-              equalTo: "Passwords do not match.",
-            },
-
-            terms: {
-              required: "You must agree to the terms.",
-            },
-          },
-
-          submitHandler: function (form) {
-            alert("Registration successful!");
-          },
-        });
-      });
-    </script>
-  </body>
+</body>
 </html>
