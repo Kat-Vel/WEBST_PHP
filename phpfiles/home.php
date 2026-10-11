@@ -17,7 +17,7 @@
             </p>
 
             <div class="hero-buttons">
-              <a href="register.html" class="btn btn-salon btn-lg">
+              <a href="register.php" class="btn btn-salon btn-lg">
                 Get Started
               </a>
 

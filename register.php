@@ -24,7 +24,7 @@
         <div class="col-12 col-sm-10 col-md-8 col-lg-6">
           <div class="auth-card">
             <div class="text-center">
-              <a href="index.html" class="brand-name"> Smart Salon </a>
+              <a href="index.php" class="brand-name"> Smart Salon </a>
             </div>
 
             <div class="text-center auth-heading">
@@ -126,11 +126,11 @@
             <div class="register-text">
               Already have an account?
 
-              <a href="login.html"> Login </a>
+              <a href="login.php"> Login </a>
             </div>
 
             <div class="back-container">
-              <a href="index.html" class="back-link"> Back to Home </a>
+              <a href="index.php" class="back-link"> Back to Home </a>
             </div>
           </div>
         </div>

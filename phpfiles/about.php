@@ -93,7 +93,7 @@
               Designed to make salon services easier and more convenient for
               customers.
             </p>
-            <a href="register.html" class="btn btn-salon">
+            <a href="register.php" class="btn btn-salon">
               Create an Account
             </a>
           </div>

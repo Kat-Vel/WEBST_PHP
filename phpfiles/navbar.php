@@ -1,6 +1,6 @@
     <nav class="navbar navbar-expand-lg">
       <div class="container">
-        <a class="navbar-brand" href="index.html"> Smart Salon </a>
+        <a class="navbar-brand" href="index.php"> Smart Salon </a>
 
         <button
           class="navbar-toggler"
@@ -26,11 +26,11 @@
             </li>
 
             <li class="nav-item ms-lg-3">
-              <a class="btn btn-outline-salon" href="login.html"> Login </a>
+              <a class="btn btn-outline-salon" href="login.php"> Login </a>
             </li>
 
             <li class="nav-item ms-lg-2">
-              <a class="btn btn-salon" href="register.html"> Register </a>
+              <a class="btn btn-salon" href="register.php"> Register </a>
             </li>
           </ul>
         </div>

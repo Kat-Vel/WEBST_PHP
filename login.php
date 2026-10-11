@@ -26,7 +26,7 @@
             <!-- BRAND -->
 
             <div class="text-center">
-              <a href="index.html" class="brand-name"> Smart Salon </a>
+              <a href="index.php" class="brand-name"> Smart Salon </a>
             </div>
 
             <div class="text-center auth-heading">
@@ -96,11 +96,11 @@
             <div class="register-text">
               Don't have an account?
 
-              <a href="register.html"> Register </a>
+              <a href="register.php"> Register </a>
             </div>
 
             <div class="back-container">
-              <a href="index.html" class="back-link"> Back to Home</a>
+              <a href="index.php" class="back-link"> Back to Home</a>
             </div>
           </div>
         </div>
