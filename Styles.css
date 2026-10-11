@@ -1,0 +1,675 @@
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #3b3238;
+    background: #ffffff;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+:root {
+    --main-color: #8d5f78;
+    --dark-color: #30262d;
+    --light-color: #f8f3f6;
+    --border-color: #e5dce2;
+    --text-color: #3b3238;
+    --muted-color: #777177;
+}
+
+
+.navbar {
+    background: #ffffff;
+    border-bottom: 1px solid #eee7eb;
+    padding: 18px 0;
+}
+
+
+.navbar-brand {
+    color: var(--dark-color) !important;
+    font-size: 23px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+
+.nav-link {
+    color: var(--text-color) !important;
+    font-weight: 500;
+    margin: 0 5px;
+}
+
+
+.nav-link:hover {
+    color: var(--main-color) !important;
+}
+
+
+.btn-salon {
+    background: var(--main-color);
+    border: 1px solid var(--main-color);
+    color: #ffffff;
+    border-radius: 8px;
+    padding: 10px 22px;
+    font-weight: 600;
+}
+
+
+.btn-salon:hover {
+    background: var(--dark-color);
+    border-color: var(--dark-color);
+    color: #ffffff;
+}
+
+
+.btn-outline-salon {
+    background: transparent;
+    border: 1px solid var(--main-color);
+    color: var(--main-color);
+    border-radius: 8px;
+    padding: 10px 22px;
+    font-weight: 600;
+}
+
+
+.btn-outline-salon:hover {
+    background: var(--main-color);
+    color: #ffffff;
+}
+
+
+.hero-section {
+    min-height: 650px;
+    display: flex;
+    align-items: center;
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff 0%,
+            #faf5f8 55%,
+            #f2e4eb 100%
+        );
+    padding: 80px 0;
+}
+
+
+.hero-small {
+    color: var(--main-color);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+
+.hero-section h1 {
+    color: var(--dark-color);
+    font-size: clamp(45px, 6vw, 72px);
+    font-weight: 700;
+    line-height: 1.05;
+    margin-bottom: 25px;
+}
+
+
+.hero-section h1 span {
+    color: var(--main-color);
+}
+
+
+.hero-description {
+    color: var(--muted-color);
+    font-size: 18px;
+    line-height: 1.8;
+    max-width: 570px;
+    margin-bottom: 30px;
+}
+
+
+.hero-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+
+.salon-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 25px;
+    padding: 45px;
+    margin-left: 30px;
+    box-shadow:
+        0 20px 50px rgba(48, 38, 45, 0.10);
+}
+
+
+.salon-card-icon {
+    width: 65px;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    background: #f0e1e9;
+    color: var(--main-color);
+    font-size: 28px;
+    margin-bottom: 25px;
+}
+
+
+.salon-card h3 {
+    color: var(--dark-color);
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+
+.salon-card p {
+    color: var(--muted-color);
+    line-height: 1.7;
+}
+
+
+.salon-info {
+    border-top: 1px solid #eee7eb;
+    margin-top: 25px;
+    padding-top: 20px;
+}
+
+
+.salon-info div {
+    margin-bottom: 12px;
+    color: var(--text-color);
+    font-size: 14px;
+}
+
+
+.salon-info i {
+    color: var(--main-color);
+    margin-right: 8px;
+}
+
+
+.section-padding {
+    padding: 90px 0;
+}
+
+
+.section-heading {
+    margin-bottom: 50px;
+}
+
+
+.section-heading p,
+.section-label {
+    color: var(--main-color);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+
+.section-heading h2 {
+    color: var(--dark-color);
+    font-size: 38px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+
+.section-heading span {
+    color: var(--muted-color);
+}
+
+
+.service-card {
+    height: 100%;
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 30px;
+    transition: 0.2s;
+}
+
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow:
+        0 15px 35px rgba(48, 38, 45, 0.08);
+}
+
+
+.service-icon {
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f1e3ea;
+    color: var(--main-color);
+    border-radius: 15px;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+
+.service-card h4 {
+    color: var(--dark-color);
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+
+.service-card p {
+    color: var(--muted-color);
+    line-height: 1.7;
+    margin-bottom: 0;
+}
+
+
+.about-section {
+    background: var(--light-color);
+    padding: 90px 0;
+}
+
+
+.about-carousel {
+    width: 100%;
+    height: 333px;
+    background: var(--dark-color);
+    border-radius: 25px;
+    overflow: hidden;
+    position: relative;
+}
+
+
+.about-carousel .carousel-inner {
+    width: 100%;
+    height: 100%;
+}
+
+
+.about-carousel .carousel-item {
+    width: 100%;
+    height: 333px;
+}
+
+
+.about-carousel .carousel-item img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+
+.about-carousel .carousel-control-prev,
+.about-carousel .carousel-control-next {
+    width: 12%;
+}
+
+
+.about-carousel .carousel-control-prev-icon,
+.about-carousel .carousel-control-next-icon {
+    width: 35px;
+    height: 35px;
+    background-color: rgba(48, 38, 45, 0.55);
+    border-radius: 50%;
+    background-size: 55%;
+}
+
+
+.about-carousel .carousel-indicators {
+    margin-bottom: 15px;
+}
+
+
+.about-carousel .carousel-indicators button {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    margin: 0 4px;
+}
+
+
+.about-box {
+    background: var(--dark-color);
+    color: #ffffff;
+    border-radius: 25px;
+    padding: 50px;
+}
+
+
+.about-box i {
+    font-size: 40px;
+    color: #d8a7bd;
+    margin-bottom: 20px;
+}
+
+
+.about-box h3 {
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+
+.about-box p {
+    color: #d9d1d7;
+    line-height: 1.7;
+    margin-bottom: 0;
+}
+
+
+.about-section h2 {
+    color: var(--dark-color);
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+
+.about-section > .container p:not(.section-label) {
+    color: var(--muted-color);
+    line-height: 1.8;
+}
+
+
+footer {
+    background: #241d23;
+    color: #ffffff;
+    padding: 40px 0;
+}
+
+
+footer h5 {
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+
+footer p {
+    color: #cfc5cc;
+    margin-bottom: 15px;
+}
+
+
+footer small {
+    color: #9f969d;
+}
+
+
+.auth-page {
+    min-height: 100vh;
+    background:
+        radial-gradient(
+            circle at top left,
+            #f1d1df 0%,
+            transparent 38%
+        ),
+        radial-gradient(
+            circle at bottom right,
+            #e8c2d5 0%,
+            transparent 40%
+        ),
+        linear-gradient(
+            135deg,
+            #f4dfe9 0%,
+            #edd3df 50%,
+            #f6e5ed 100%
+        );
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+}
+
+
+.auth-page .min-vh-100 {
+    min-height: calc(100vh - 40px) !important;
+}
+
+
+.auth-card {
+    width: 100%;
+    max-width: 750px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.48);
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    border-radius: 24px;
+    padding: 30px 42px;
+    box-shadow:
+        0 20px 55px rgba(48, 38, 45, 0.16);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+}
+
+
+.brand-name {
+    color: var(--dark-color);
+    font-size: 24px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+
+.auth-heading {
+    margin-top: 16px;
+    margin-bottom: 26px;
+}
+
+
+.auth-heading h1 {
+    color: var(--dark-color);
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 7px;
+}
+
+
+.auth-heading p {
+    color: var(--muted-color);
+    margin-bottom: 0;
+}
+
+
+.form-label {
+    color: var(--dark-color);
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+
+.form-control {
+    height: 50px;
+    background: rgba(255, 255, 255, 0.58);
+    border: 1px solid rgba(141, 95, 120, 0.22);
+    border-radius: 10px;
+    padding: 10px 14px;
+}
+
+
+.form-control:focus {
+    background: rgba(255, 255, 255, 0.75);
+    border-color: var(--main-color);
+    box-shadow:
+        0 0 0 3px rgba(141, 95, 120, 0.12);
+}
+
+
+.attempts {
+    text-align: center;
+    color: #777177;
+    font-size: 14px;
+    margin: 12px 0 22px;
+}
+
+
+.login-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    font-size: 14px;
+}
+
+
+.forgot-link {
+    color: var(--main-color);
+    text-decoration: none;
+}
+
+
+.forgot-link:hover {
+    text-decoration: underline;
+}
+
+
+.login-btn {
+    height: 50px;
+    background: var(--main-color);
+    border: 1px solid var(--main-color);
+    color: #ffffff;
+    border-radius: 9px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+
+.login-btn:hover {
+    background: var(--dark-color);
+    border-color: var(--dark-color);
+    color: #ffffff;
+}
+
+
+.login-btn:disabled {
+    background: #bcb6ba;
+    border-color: #bcb6ba;
+    cursor: not-allowed;
+    color: #ffffff;
+}
+
+
+label.error {
+    display: block;
+    color: #dc3545;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+
+.error-message {
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: 12px;
+}
+
+
+.success-message {
+    color: #198754;
+    font-size: 14px;
+    margin-top: 12px;
+}
+
+
+.register-text {
+    text-align: center;
+    color: var(--muted-color);
+    font-size: 14px;
+    margin-top: 24px;
+}
+
+
+.register-text a {
+    color: var(--main-color);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+
+.register-text a:hover {
+    text-decoration: underline;
+}
+
+
+.back-container {
+    text-align: center;
+    margin-top: 16px;
+}
+
+
+.back-link {
+    color: var(--muted-color);
+    font-size: 14px;
+    text-decoration: none;
+}
+
+
+.back-link:hover {
+    color: var(--main-color);
+    text-decoration: underline;
+}
+
+
+@media (max-width: 991px) {
+
+    .salon-card {
+        margin-left: 0;
+        margin-top: 50px;
+    }
+
+}
+
+
+@media (max-width: 576px) {
+
+    .hero-section {
+        padding: 60px 0;
+    }
+
+
+    .hero-section h1 {
+        font-size: 45px;
+    }
+
+
+    .salon-card {
+        padding: 30px;
+    }
+
+
+    .section-padding {
+        padding: 65px 0;
+    }
+
+
+    .auth-card {
+        padding: 28px 24px;
+    }
+
+
+    .login-options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+
+    .about-carousel {
+        height: 260px;
+    }
+
+
+    .about-carousel .carousel-item {
+        height: 260px;
+    }
+
+}
